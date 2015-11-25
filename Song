@@ -1,0 +1,84 @@
+import lejos.nxt.Sound;
+
+public class Song {
+   private static String[] melody = { "Bb4", "Bb4", "Bb4", "Bb4", "Ab4", "Bb4"};
+   private static String[] melody2 = { "Bb4", "Db5", "Bb4", "Ab4"};
+   private static String[] melody3 = { "Gb4", "Eb4", "Eb4", "F4", "F#4", "Eb4"};
+
+   public static void main(String[] args) {
+      Music music = new Music();
+      while (true){
+    	  int i = 0;
+	      music.musicFlute(melody[i], 500);
+	      i++;
+	      Sound.pause(500);
+	      music.musicFlute(melody[i], 250);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      Sound.pause(250);
+	      //end of first bar
+	      i = 0;
+	      music.musicFlute(melody[i], 500);
+	      i++;
+	      Sound.pause(500);
+	      music.musicFlute(melody[i], 250);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      music.musicFlute(melody[i], 125);
+	      i++;
+	      Sound.pause(250);
+	      //end of second bar
+	      
+	      i = 0;
+	      music.musicFlute(melody2[i], 500);
+	      i++;
+	      Sound.pause(250);
+	      music.musicFlute(melody2[i], 500);
+	      i++;
+	      music.musicFlute(melody2[i], 500);
+	      i++;
+	      music.musicFlute(melody2[i], 500);
+	      i++;
+	      //end of third bar
+	      
+	      i = 0;
+	      music.musicFlute(melody3[i], 250);
+	      i++;
+	      Sound.pause(250);
+	      music.musicFlute(melody3[i], 250); //B 
+	      i++;
+	      music.musicFlute(melody3[i], 250); //C
+	      i++;
+	      music.musicFlute(melody3[i], 250); //C
+	      i++;
+	      music.musicFlute(melody3[i], 250); //D
+	      i++;
+	      music.musicFlute(melody3[i], 250); //D
+	      i++;
+	      Sound.pause(500);
+	      
+	      
+	      //end of fourth bar
+	       
+      }
+   }
+}
+
+// 1, 1, 1/2, 1/4, 1/4. 1/4, 1/4, 1/4, 1/2
+// 1, 1, 1/2, 1/4, 1/4, 1/4, 1/4,
+// 1, 1/2, 1, 1/2, 1/2, 1/2
+// ALL 1/2
+
+//CCVBV
