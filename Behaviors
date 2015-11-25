@@ -1,6 +1,6 @@
 PRIORITIES (LOW->HIGH)
 --------------------------
-Move Forward
+Move Forward //Finished (Kirstin)
 	takeAction: true
 	action: move forward
 	suppress: 
