@@ -1,0 +1,15 @@
+import lejos.robotics.subsumption.Behavior;
+
+public Forward implements Behavior{
+  public boolean takeAction{
+    return true;
+  }
+  
+  public void action{
+    Driver.power.
+  }
+  
+  public void suppress{
+    
+  }
+}
