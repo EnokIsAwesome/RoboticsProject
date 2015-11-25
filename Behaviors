@@ -1,14 +1,19 @@
 PRIORITIES (LOW->HIGH)
 --------------------------
-Follow Black Path
+Move Forward
 	takeAction: true
-	action: follow black path
-	suppress: stop
+	action: move forward
+	suppress: 
 
-Follow Set Colour
-	takeAction: colour set
-	action: follow colour path
-	suppress:
+Find Black Path
+	takeAction: off black path
+	action: rotate 150 right/left, rotate 300 left/right
+	suppress: 
+
+Find Colour Path
+	takeAction: off colour path & colour set
+	action: rotate 150 right/left, rotate 300 left/right
+	suppress: 
 
 Target Found
 	takeAction: change in ultrasonic sensor
@@ -45,7 +50,7 @@ Systems Check
 	action: checks if motors have stalled (e.g. Motor.A.isStalled())
 	suppress: 
 
-Abandon
+Abandon Target
 	takeAction: button is pressed (LEFT)
 	action: move on
 	suppress: 
