@@ -1,6 +1,7 @@
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.LightSensor;
+import lejos.nxt.ColorSensor;
 import lejos.nxt.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.robotics.subsumption.Arbitrator;
@@ -12,6 +13,7 @@ public Driver{
   static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, 60, 60);
   static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S);
   static LightSensor ls = new LightSensor(SensorPort.S);
+  static ColorSensor cs = new ColorSensor(SensorPort.S);
   
   public static void main(String[] args){
     Behavior b1 = ;
