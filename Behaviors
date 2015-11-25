@@ -1,13 +1,13 @@
 PRIORITIES (LOW->HIGH)
 --------------------------
-Move Forward
+FollowBlackPath
 	takeAction: true
 	action: follow black path
 	suppress: stop
 
 FollowSetColour
-	takeAction:
-	action:
+	takeAction: colour set
+	action: follow colour path
 	suppress:
 
 Scan Area
@@ -38,6 +38,11 @@ Mission Report
 Systems Check
 	takeAction: button is pressed (RIGHT)
 	action: checks if motors have stalled (e.g. Motor.A.isStalled())
+	suppress: 
+
+SetColour
+	takeAction: colour not set
+	action: set colour
 	suppress: 
 
 Cease Fire
