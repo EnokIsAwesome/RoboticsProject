@@ -1,53 +1,53 @@
 PRIORITIES (LOW->HIGH)
 --------------------------
-FollowBlackPath
+Follow Black Path
 	takeAction: true
 	action: follow black path
 	suppress: stop
 
-FollowSetColour
+Follow Set Colour
 	takeAction: colour set
 	action: follow colour path
 	suppress:
 
-Scan Area
-	takeAction: Move forward.
-	action: check sensors(ultra/colour) to find targerts
+Target Found
+	takeAction: change in ultrasonic sensor
+	action: set target found to true, move forwards slowly until ultrasonic sensor value increases
 	suppress: stop
 
+Shortest Distance
+	takeAction: ultrasonic sensor value increases & target found
+	action: stop, turn 90 degrees to face target, turn ultrasonic sesnor -90 degrees
+	suppress:
+
 Save
-	takeAction: target lined up
+	takeAction: target shortest distance
 	action: turn on floodlight until target removed
 	suppress: stop
 
-Line Up
-	takeAction: change in ultrasonic sensor
-	action: move forwards until shortest distance from target
-	suppress: stop
-
 Celebrate
-	takeAction: target shot(Analyse Target Condition: target down)
+	takeAction: targets saved > set value
 	action: display message/make noise/move
 	suppress: stop
 
 Mission Report
-	takeAction: all targets down
-	action: display stats(targets down, targets up, shots fired)
-	suppress: stop
+	takeAction: stopped
+	action: display stats(targets saved, time taken, distance travelled)
+	suppress: 
+
+Set Colour
+	takeAction: colour not set
+	action: set colour
+	suppress: 
 
 Systems Check
 	takeAction: button is pressed (RIGHT)
 	action: checks if motors have stalled (e.g. Motor.A.isStalled())
 	suppress: 
 
-SetColour
-	takeAction: colour not set
-	action: set colour
-	suppress: 
-
-Cease Fire
+Abandon
 	takeAction: button is pressed (LEFT)
-	action: halt program unitl restart
+	action: move on
 	suppress: 
 
 Emergency Stop
