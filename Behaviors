@@ -1,0 +1,67 @@
+PRIORITIES (LOW->HIGH)
+--------------------------
+Move Forward
+	takeAction: true
+	action: move forward
+	suppress: stop
+
+Scan Area
+	takeAction: Move forward.
+	action: check sensors(ultra/colour) to find targerts. (found())
+	suppress: stop
+
+Find Target
+	takeAction: change in ultrasonic sensor (& colour sensor?) (if target.found()).
+	action: [Line Up Shot]
+	suppress: 
+
+Fire
+	takeAction: target lined up
+	action: move firing motor
+	suppress: stop
+
+Line Up Shot
+	takeAction: change in ultrasonic sensor
+	action: move backwards & forwards until shortest distance from target
+		calculate angle/speed of projectile dep. on distance
+	suppress: stop
+
+Retreat After 3 Shots
+	takeAction: 3 shots taken on single target, Analyse Target Condition: target up
+	action: move on
+	suppress: 
+
+Analyse Target Condition
+	takeAction: shot fired
+	action: check for change in ultrasonic sensor. changed: target down, else: still up		(boolean)
+	suppress: 
+
+Request Reload
+	takeAction: shot fired
+	action: wait for reload (press ENTER when reloaded)
+	suppress: 
+
+Celebrate
+	takeAction: target shot(Analyse Target Condition: target down)
+	action: display message/make noise/move
+	suppress: stop
+
+Mission Report
+	takeAction: all targets down
+	action: display stats(targets down, targets up, shots fired)
+	suppress: stop
+
+Systems Check
+	takeAction: button is pressed (RIGHT)
+	action: checks if motors have stalled (e.g. Motor.A.isStalled())
+	suppress: 
+
+Cease Fire
+	takeAction: button is pressed (LEFT)
+	action: halt program unitl restart
+	suppress: 
+
+Emergency Stop
+	takeAction: button is pressed (ESCAPE)
+	action: end program
+	suppress: 
