@@ -1,0 +1,19 @@
+import lejos.nxt.SensorPort;
+import lejos.nxt.UltrasonicSensor;
+import lejos.nxt.LightSensor;
+import lejos.robotics.subsumption.Behavior;
+import lejos.robotics.
+
+public Driver{
+  
+  private static final DIAMETER = 56;
+  private static final AXLE; //17cm
+  static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, 60, 60);
+  static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S);
+  static LightSensor ls = new LightSensor(SensorPort.S);
+  
+  
+  public static void main(String[] args){
+    
+  }
+}
