@@ -10,7 +10,7 @@ public Driver{
   
   private static final float DIAMETER = 56;
   private static final float AXLE = 170;
-  static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, 60, 60);
+  static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, Motor.A, Motor.C);
   static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S);
   static LightSensor ls = new LightSensor(SensorPort.S);
   static ColorSensor cs = new ColorSensor(SensorPort.S);
