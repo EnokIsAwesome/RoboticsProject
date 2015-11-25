@@ -1,19 +1,33 @@
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.LightSensor;
+import lejos.nxt.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
-import lejos.robotics.
+import lejos.robotics.subsumption.Arbitrator;
 
 public Driver{
   
-  private static final DIAMETER = 56;
-  private static final AXLE; //17cm
+  private static final float DIAMETER = 56;
+  private static final float AXLE = 170;
   static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, 60, 60);
   static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S);
   static LightSensor ls = new LightSensor(SensorPort.S);
   
-  
   public static void main(String[] args){
+    Behavior b1 = ;
+    Behavior b2 = ;
+    Behavior b3 = ;
+    Behavior b4 = ;
+    Behavior b5 = ;
+    Behavior b6 = ;
+    Behavior b7 = ;
+    Behavior b8 = ;
+    Behavior b9 = ;
+    Behavior b10 = ;
+    Behavior b11 = ;
+    Behavior behaviors[] = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11};
     
+    Arbitrator ab = new Arbitrator(behaviors);
+    ab.start();
   }
 }
