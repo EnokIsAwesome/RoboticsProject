@@ -6,10 +6,10 @@ public Forward implements Behavior{
   }
   
   public void action{
-    Driver.power.
+    Driver.power.forward();
   }
   
   public void suppress{
-    
+    Driver.power.stop();
   }
 }
