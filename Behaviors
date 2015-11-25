@@ -2,44 +2,28 @@ PRIORITIES (LOW->HIGH)
 --------------------------
 Move Forward
 	takeAction: true
-	action: move forward
+	action: follow black path
 	suppress: stop
+
+FollowSetColour
+	takeAction:
+	action:
+	suppress:
 
 Scan Area
 	takeAction: Move forward.
-	action: check sensors(ultra/colour) to find targerts. (found())
+	action: check sensors(ultra/colour) to find targerts
 	suppress: stop
 
-Find Target
-	takeAction: change in ultrasonic sensor (& colour sensor?) (if target.found()).
-	action: [Line Up Shot]
-	suppress: 
-
-Fire
+Save
 	takeAction: target lined up
-	action: move firing motor
+	action: turn on floodlight until target removed
 	suppress: stop
 
-Line Up Shot
+Line Up
 	takeAction: change in ultrasonic sensor
-	action: move backwards & forwards until shortest distance from target
-		calculate angle/speed of projectile dep. on distance
+	action: move forwards until shortest distance from target
 	suppress: stop
-
-Retreat After 3 Shots
-	takeAction: 3 shots taken on single target, Analyse Target Condition: target up
-	action: move on
-	suppress: 
-
-Analyse Target Condition
-	takeAction: shot fired
-	action: check for change in ultrasonic sensor. changed: target down, else: still up		(boolean)
-	suppress: 
-
-Request Reload
-	takeAction: shot fired
-	action: wait for reload (press ENTER when reloaded)
-	suppress: 
 
 Celebrate
 	takeAction: target shot(Analyse Target Condition: target down)
@@ -63,5 +47,5 @@ Cease Fire
 
 Emergency Stop
 	takeAction: button is pressed (ESCAPE)
-	action: end program
+	action: halt program until restart or exit
 	suppress: 
