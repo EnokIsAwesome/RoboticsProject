@@ -25,6 +25,13 @@ Shortest Distance
 	action: stop, turn 90 degrees to face target, turn ultrasonic sesnor -90 degrees
 	suppress:
 
+
+
+------------------------------------------------
+
+add variables from behaviors to driver such as 
+colorSet boolean = false;
+String colorPath;
 Save
 	takeAction: target shortest distance
 	action: turn on floodlight until target removed
