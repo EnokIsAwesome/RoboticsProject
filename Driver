@@ -1,35 +1,46 @@
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.LightSensor;
+import lejos.nxt.TouchSensor;
+import lejos.nxt.Motor;
 import lejos.nxt.ColorSensor;
-import lejos.nxt.DifferentialPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.robotics.subsumption.Arbitrator;
 
-public Driver{
+public class Driver{
   
-  private static final float DIAMETER = 56;
-  private static final float AXLE = 170;
-  static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, Motor.A, Motor.C);
-  static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S);
-  static LightSensor ls = new LightSensor(SensorPort.S);
-  static ColorSensor cs = new ColorSensor(SensorPort.S);
-  
-  public static void main(String[] args){
-    Behavior b1 = ;
-    Behavior b2 = ;
-    Behavior b3 = ;
-    Behavior b4 = ;
-    Behavior b5 = ;
-    Behavior b6 = ;
-    Behavior b7 = ;
-    Behavior b8 = ;
-    Behavior b9 = ;
-    Behavior b10 = ;
-    Behavior b11 = ;
-    Behavior behaviors[] = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11};
-    
-    Arbitrator ab = new Arbitrator(behaviors);
-    ab.start();
-  }
+	private static final float DIAMETER = 56;
+	private static final float AXLE = 170;
+	static int targetsSaved = 0;
+	static boolean green;
+	static boolean stop = false;
+	static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, Motor.B, Motor.C);
+	static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S4);
+	static LightSensor ls = new LightSensor(SensorPort.S2);
+	static ColorSensor cs = new ColorSensor(SensorPort.S3);
+	static TouchSensor ts = new TouchSensor(SensorPort.S1);
+	  
+	public static void main(String[] args){
+		  Behavior b1 = new Celebrate();
+		  Behavior b2 = new Left();
+		  Behavior b3 = new Right();
+		  Behavior b4 = new FindBlackLine();
+		  Behavior b5 = new FindColorPath();
+		  Behavior b6 = new CivilianFound();
+		  Behavior b7 = new FindClostestPosition();
+		  Behavior b8 = new SaveCivilian();
+		  Behavior b9 = new Celebrate();
+		  Behavior b10 = new MissionReport();
+		  Behavior b11 = new SetPathColor();
+		  Behavior b12 = new PathEnd();
+		  Behavior b13 = new SystemCheck();
+		  Behavior b14 = new Calibrate();
+		  Behavior b15 = new ReleaseStop();
+		  Behavior b16 = new EmergancyStop();
+		  Behavior behaviors[] = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16};
+		    
+		  Arbitrator ab = new Arbitrator(behaviors);
+		  ab.start();
+	}
 }
