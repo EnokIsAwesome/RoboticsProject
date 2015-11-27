@@ -1,0 +1,31 @@
+import lejos.robotics.subsumption.Behavior;
+
+public class Save implements Behavior {
+
+	@Override
+	public boolean takeControl() {
+		// TODO Auto-generated method stub
+		if(closestPoint == true){
+			closestPoint == false;
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		
+		while(us.getDistance < 200){
+			ls.floodLight(true);
+		}
+		ls.floodLight(false);
+	}
+
+	@Override
+	public void suppress() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
