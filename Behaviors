@@ -55,9 +55,9 @@ Abandon Target
 	action: move on
 	suppress: 
 
-Emergency Stop
+Emergency Stop //Finished (Kirstin)
 	takeAction: button is pressed (ESCAPE)
-	action: halt program until restart or exit
+	action: halt program until restart
 	suppress: 
 
 
