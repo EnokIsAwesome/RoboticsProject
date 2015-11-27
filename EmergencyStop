@@ -1,0 +1,28 @@
+import lejos.nxt.Button;
+import lejos.robotics.subsumption.Behavior;
+
+public class EmergancyStop implements Behavior {
+
+	public boolean takeControl() {
+		if(Button.ESCAPE.isDown()){
+			return true;
+		}
+		return false;
+	}
+
+	public void action() {
+		Driver.power.stop();
+		Button.ESCAPE.waitForPressAndRelease();
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void suppress() {
+		
+	}
+
+}
