@@ -1,0 +1,32 @@
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class CalLow implements Behavior {
+
+	private static boolean initialLowCal = false;
+	
+	public boolean takeControl() {
+		if(Driver.ls.readValue() > Driver.ls.getLow() || initialLowCal == false){
+			return true;
+		}
+		return false;
+	}
+
+	public void action() {
+		LCD.drawString("Calibration", 0, 0);
+		LCD.drawString("-----------", 0, 1);
+		
+		Driver.ls.setLow(Driver.ls.readValue());
+		
+		initialLowCal = true;
+		LCD.drawString("Low: "+Driver.ls.getLow(), 0, 4);
+		Button.ENTER.waitForPressAndRelease();
+		LCD.clear();
+	}
+
+	public void suppress() {
+		
+	}
+
+}
