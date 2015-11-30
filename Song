@@ -67,7 +67,7 @@ public class Song {
 	      i++;
 	      music.musicFlute(melody3[i], 250); //D
 	      i++;
-	      Sound.pause(500);
+	      Sound.pause(250);
 	      
 	      
 	      //end of fourth bar
