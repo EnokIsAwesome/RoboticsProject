@@ -1,0 +1,32 @@
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class CalHigh implements Behavior {
+
+	private static boolean initialHighCal = false;
+	
+	public boolean takeControl() {
+		if(Driver.ls.readValue() > Driver.ls.getHigh() || initialHighCal == false){
+			return true;
+		}
+		return false;
+	}
+
+	public void action() {
+		LCD.drawString("Calibration", 0, 0);
+		LCD.drawString("-----------", 0, 1);
+		
+		Driver.ls.setHigh(Driver.ls.readValue());
+		
+		initialHighCal = true;
+		LCD.drawString("High: "+Driver.ls.getHigh(), 0, 3);
+		Button.ENTER.waitForPressAndRelease();
+		LCD.clear();
+	}
+
+	public void suppress() {
+		
+	}
+
+}
