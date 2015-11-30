@@ -1,0 +1,40 @@
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class MissionReport implements Behavior {
+
+	@Override
+	public static int TargetsSaved;
+	public static int TimeTaken;
+	public static int distanceTravelled;
+	
+	public boolean takeControl() {
+		if (Driver.cs.getColorID()==green) //
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		LCD.drawString("Targets Saved: " , 0, 0);
+		LCD.drawInt(TargetsSaved, 0, 1);
+		LCD.drawString("Time taken: " , 0, 2);
+		LCD.drawInt(TimeTaken, 0, 3);
+		LCD.drawString("Distance Travelled: " , 0, 4);
+		LCD.drawInt(distanceTravelled, 0, 5);
+		
+		Button.ENTER.waitForPressAndRelease();
+		Driver.partyTime = true; 
+	}
+
+	@Override
+	public void suppress() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
