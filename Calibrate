@@ -2,9 +2,8 @@ import lejos.nxt.Button;
 import lejos.nxt.LCD;
 import lejos.robotics.subsumption.Behavior;
 
-public class CalHigh implements Behavior {
+public class Calibrate implements Behavior {
 
-	private static boolean initialHighCal = false;
 	private static String a "";
 	
 	public boolean takeControl() {
