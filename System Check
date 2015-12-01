@@ -5,6 +5,7 @@ import lejos.robotics.subsumption.Behavior;
 
 public class SystemCheck implements Behavior {
 	boolean systemChecked = false;
+	
 	public boolean takeControl() {
 		return !systemChecked;
 	}
