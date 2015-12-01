@@ -5,24 +5,30 @@ import lejos.robotics.subsumption.Behavior;
 public class CalHigh implements Behavior {
 
 	private static boolean initialHighCal = false;
+	private static String a "";
 	
 	public boolean takeControl() {
-		if(Driver.ls.readValue() > Driver.ls.getHigh() || initialHighCal == false){
-			return true;
-		}
-		return false;
+		return !calibrated;
 	}
 
 	public void action() {
 		LCD.drawString("Calibration", 0, 0);
 		LCD.drawString("-----------", 0, 1);
+		if (cs.initWhiteBalance() == -1){
+			a = "Calibrated";
+		}
+		else { a = "Calibration Fail!";}
+		LCD.drawString("Black: " + a, 0, 3);
 		
-		Driver.ls.setHigh(Driver.ls.readValue());
+		if (cs.initBlackLevel() == -1){
+			a = "Calibrated";
+		}
+		LCD.drawString("White: " + a, 0, 4);
 		
-		initialHighCal = true;
-		LCD.drawString("High: "+Driver.ls.getHigh(), 0, 3);
+		LCD.drawString("Press Orange Button", 0, 5);
 		Button.ENTER.waitForPressAndRelease();
 		LCD.clear();
+		calibrated = true;
 	}
 
 	public void suppress() {
