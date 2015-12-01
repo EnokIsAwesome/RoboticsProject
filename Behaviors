@@ -50,7 +50,7 @@ Systems Check
 	action: checks if motors have stalled (e.g. Motor.A.isStalled())
 	suppress: 
 
-Abandon Target
+Abandon Target// shahad started
 	takeAction: button is pressed (LEFT)
 	action: move on
 	suppress: 
