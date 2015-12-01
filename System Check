@@ -4,15 +4,16 @@ import lejos.nxt.Motor;
 import lejos.robotics.subsumption.Behavior;
 
 public class SystemCheck implements Behavior {
-
+	boolean systemChecked = false;
 	public boolean takeControl() {
-		return Button.RIGHT.isDown();
+		return !systemChecked;
 	}
 
 	public void action() {
 		LCD.drawString("Motor B stalled: "+Motor.B.isStalled(), 0, 1);
 		LCD.drawString("Motor C stalled: "+Motor.C.isStalled(), 0, 3);
 		Button.ENTER.waitForPressAndRelease();
+		systemChecked = true;
 	}
 
 	public void suppress() {
