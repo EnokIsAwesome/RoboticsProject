@@ -14,16 +14,17 @@ public class CalHigh implements Behavior {
 	public void action() {
 		LCD.drawString("Calibration", 0, 0);
 		LCD.drawString("-----------", 0, 1);
-		if (cs.initWhiteBalance() == -1){
+		if (cs.initWhiteBalance() == 0){
 			a = "Calibrated";
 		}
 		else { a = "Calibration Fail!";}
-		LCD.drawString("Black: " + a, 0, 3);
+		LCD.drawString("White: " + a, 0, 3);
 		
-		if (cs.initBlackLevel() == -1){
+		if (cs.initBlackLevel() == 0){
 			a = "Calibrated";
 		}
-		LCD.drawString("White: " + a, 0, 4);
+		else { a = "Calibration Fail!";}
+		LCD.drawString("Black: " + a, 0, 4);
 		
 		LCD.drawString("Press Orange Button", 0, 5);
 		Button.ENTER.waitForPressAndRelease();
