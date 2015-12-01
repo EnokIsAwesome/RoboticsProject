@@ -5,11 +5,7 @@ public class Save implements Behavior {
 	@Override
 	public boolean takeControl() {
 		// TODO Auto-generated method stub
-		if(closestPoint == true){
-			closestPoint == false;
-			return true;
-		}
-		return false;
+		return closestPoint;
 	}
 
 	@Override
@@ -20,6 +16,7 @@ public class Save implements Behavior {
 			ls.floodLight(true);
 		}
 		ls.floodLight(false);
+		closestPoint == false;
 	}
 
 	@Override
