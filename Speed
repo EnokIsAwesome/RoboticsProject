@@ -1,0 +1,12 @@
+
+public class Speed {
+	
+	public void Slow(){
+		Driver.power.setTravelSpeed(50);
+	}
+	
+	public void Fast(){
+		Driver.power.setTravelSpeed(150);
+	}
+	
+}
