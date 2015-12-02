@@ -1,0 +1,38 @@
+import lejos.nxt.Sound;
+
+import lejos.robotics.subsumption.Behavior;
+
+public class SaveCivilian implements Behavior {
+
+	public boolean takeControl() {
+		return Driver.closestPosition;
+	}
+
+	public void action() {
+		
+		Sound.buzz();
+		
+		while(Driver.us.getDistance() < 20){
+			Driver.power.stop();
+			Driver.ls.setFloodlight(true);
+		}
+		
+		Driver.ls.setFloodlight(false);
+		Driver.civsSaved++;
+		Driver.closestPosition = false;
+		
+		/*LCD.drawString("BOO", 2, 2);
+		Driver.ls.setFloodlight(true);
+		while(Driver.us.getDistance() < 20){
+			Driver.power.stop();
+		}
+		Driver.civsSaved++;
+		Driver.ls.setFloodlight(false);
+		Driver.closestPosition = false;*/
+	}
+
+	public void suppress() {
+		
+	}
+
+}
