@@ -1,0 +1,43 @@
+import lejos.nxt.Sound;
+import lejos.robotics.subsumption.Behavior;
+
+public class CivilianFound implements Behavior {
+	
+	public boolean takeControl() {
+		if (Driver.us.getDistance() < 20){
+			return true;
+		}
+		return false;
+	}
+
+	public void action() {
+		
+		Sound.beep();
+		
+		Driver.closestPosition = false;
+		Driver.setSpeed.Slow();
+		Driver.power.forward();
+		
+		int lastDistance = Driver.us.getDistance();
+		while(Driver.closestPosition == false){
+			if(lastDistance < Driver.us.getDistance()){
+				break;
+			}
+			lastDistance = Driver.us.getDistance();
+			
+		}
+		
+		Driver.closestPosition = true; 
+		if(Driver.us.getDistance() >= lastDistance){
+			if(Driver.us.getDistance() > 20){
+				Driver.power.travel(-10);
+			}
+		}
+		
+	}
+
+	public void suppress() {
+		
+	}
+
+}
