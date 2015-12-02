@@ -2,7 +2,7 @@ import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.LightSensor;
-import lejos.nxt.ColorSensor;
+import lejos.nxt.addon.ColorHTSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.robotics.subsumption.Arbitrator;
@@ -11,35 +11,39 @@ public class Driver{
   
 	private static final float DIAMETER = 56;
 	private static final float AXLE = 170;
+	static boolean partyTime = false;
+	
 	static int civsSaved = 0;
+	static long startTime = System.nanoTime();
 	static boolean red = true;
 	static boolean colorSet = false;
 	static boolean missionComplete = false;
+	static boolean closestPosition = false;
 	static String colorPath;
+	static Speed setSpeed = new Speed(); 
 	static DifferentialPilot power = new DifferentialPilot(DIAMETER, AXLE, Motor.B, Motor.C);
 	static LightSensor ls = new LightSensor(SensorPort.S2);
-	static ColorSensor cs = new ColorSensor(SensorPort.S3);
+	static ColorHTSensor cs = new ColorHTSensor(SensorPort.S3);
 	static UltrasonicSensor us = new UltrasonicSensor(SensorPort.S4);  
 	
 	public static void main(String[] args){
+		ls.setFloodlight(false);
+		
 		  Behavior b1 = new Forward();
 	/*	  Behavior b2 = new Turn();
 	  ??  Behavior b3 = new FollowPath();
 		  Behavior b3 = new FindBlackLine();
-		  Behavior b4 = new FindColorPath();
-		  Behavior b5 = new CivilianFound();
-		  Behavior b6 = new FindClostestPosition();
-		  Behavior b7 = new SaveCivilian();*/
-	/*	  Behavior b8 = new Celebrate();
-		  Behavior b9 = new MissionReport();
-		  Behavior b10 = new SetPathColor();
-		  Behavior b11 = new PathEnd();*/
+		  Behavior b4 = new FindColorPath();*/
+		  Behavior b6 = new CivilianFound(); 
+		  Behavior b7 = new SaveCivilian();
+		  Behavior b8 = new MissionReport();
+		  Behavior b9 = new Celebrate();
+/*		  Behavior b10 = new SetPathColor();
+		  Behavior b11 = new PathEnd();
 		  Behavior b12 = new SystemCheck();
-	//	  Behavior b13 = new Calibrate();
-		  Behavior b13 = new CalLow();
-		  Behavior b14 = new CalHigh();	  
-		  Behavior b15 = new EmergancyStop();
-		  Behavior behaviors[] = {b1,/*b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,*/b12,b13,b14,b15};
+		  Behavior b13 = new Calibrate();
+		  Behavior b14 = new EmergencyStop();*/
+		  Behavior behaviors[] = {b1,/*b2,b3,b4,b5,*/b6,b7,b8,b9/*b8,b9,b10,b11,b12,b13,*/};
 		    
 		  Arbitrator ab = new Arbitrator(behaviors);
 		  ab.start();
