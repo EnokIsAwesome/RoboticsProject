@@ -1,0 +1,262 @@
+[DRIVER]
+
+import lejos.nxt.addon.ColorHTSensor;
+import lejos.nxt.SensorPort;
+import lejos.nxt.UltrasonicSensor;
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.robotics.subsumption.Behavior;
+
+public class Driver {
+	//final static float DIAMETER;
+	//final static float AXLE;
+	static boolean calibrated = false;
+	static ColorHTSensor cs = new ColorHTSensor(SensorPort.S3);
+	public static void main(String[] args) {
+		
+		/*Behavior b1 = new Forward();
+		Behavior b2 = new Scan();
+		Behavior b3 = new FindTarget();
+		Behavior b4 = new Fire();
+		Behavior b5 = new LineUpShot();
+		Behavior b6 = new Retreat();
+		Behavior b7 = new AnalyseTargetCondition();
+		Behavior b8 = new Reload();
+		Behavior b9 = new Celebrate();
+		Behavior b10 = new MissionReport();
+		Behavior b11 = new SystemsCheck();
+		Behavior b12 = new CeaseFire();
+		Behavior b13 = new EmergencyStop();
+		Behavior[] behaviors = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13};*/
+		
+		Behavior b0 = new colorID2();
+		Behavior b1 = new colorID();
+		Behavior b2 = new calibrate();
+		Behavior[] behaviors = {b0,b2};
+		
+		Arbitrator ab = new Arbitrator(behaviors);
+		ab.start();
+	}
+}
+------------------------------------------------------------
+[CALIBRATE]
+
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class calibrate implements Behavior {
+
+	private static String a = "";
+	
+	public boolean takeControl() {
+		return !Driver.calibrated;
+	}
+
+	public void action() {
+		LCD.drawString("Calibration", 0, 0);
+		LCD.drawString("-----------", 0, 1);
+		
+		Button.waitForAnyPress();
+		
+		if (Driver.cs.initWhiteBalance() == 0){
+			a = "Calibrated";
+		}
+		else { a = "Calibration Fail!";}
+		LCD.drawString("White: " + a, 0, 3);
+		
+		Button.waitForAnyPress();
+		
+		if (Driver.cs.initBlackLevel() == 0){
+			a = "Calibrated";
+		}
+		else { a = "Calibration Fail!";}
+		LCD.drawString("Black: " + a, 0, 4);
+		
+		LCD.drawString("Press Orange Button", 0, 5);
+		Button.ENTER.waitForPressAndRelease();
+		LCD.clear();
+		Driver.calibrated = true;
+	}
+
+	public void suppress() {
+		
+	}
+
+}
+------------------------------------------------------------
+[COLOR ID]
+
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class colorID implements Behavior {
+
+	public boolean takeControl() {
+		return true;
+	}
+
+	public void action() {
+		switch(Driver.cs.getColorID()){
+		case 0: LCD.drawString("RED", 0, 0);
+			break;
+		case 1:LCD.drawString("GREEN", 0, 1);
+			break;
+		case 2:LCD.drawString("BLUE", 0, 2);
+			break;
+		case 3:LCD.drawString("YELLOW", 0, 2);
+			break;
+		case 4:LCD.drawString("MAGENTA", 0, 2);
+			break;
+		case 5:LCD.drawString("ORANGE", 0, 2);
+			break;
+		case 6:LCD.drawString("WHITE", 0, 2);
+			break;
+		case 7:LCD.drawString("BLACK", 0, 3);
+			break;
+		}
+		LCD.drawString(""+Driver.cs.getColorID(), 2, 5);
+		LCD.drawString(""+Driver.cs.getRGBRaw(Driver.cs.getColorID()), 2, 6);
+		
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		LCD.clear();
+	}
+
+	public void suppress() {
+
+	}
+
+}
+------------------------------------------------------------
+[COLOR ID2]
+import lejos.robotics.Color;
+import lejos.nxt.LCD;
+import lejos.robotics.subsumption.Behavior;
+
+public class colorID2 implements Behavior {
+
+	public boolean takeControl() {
+		return true;
+	}
+
+	public void action() {
+		int sumR = 0;
+		int sumG = 0;
+		int sumB = 0;
+		final int NUMBER_OF_SAMPLES = 20;
+		for (int i = 0; i < NUMBER_OF_SAMPLES; i++)
+		{
+			
+			sumR = sumR + Driver.cs.getRGBComponent(Color.RED);
+			sumG = sumG + Driver.cs.getRGBComponent(Color.GREEN);
+			sumB = sumB + Driver.cs.getRGBComponent(Color.BLUE);
+		}
+		
+		int valueR = sumR / NUMBER_OF_SAMPLES;
+		int valueG = sumG / NUMBER_OF_SAMPLES;
+		int valueB = sumB / NUMBER_OF_SAMPLES;
+		
+		//LCD.drawString("Red: " + Driver.cs.getRGBNormalized(Color.RED), 0, 0);
+		//LCD.drawString("Green: " + Driver.cs.getRGBNormalized(Color.GREEN), 0, 1);
+		//LCD.drawString("Blue: " + Driver.cs.getRGBNormalized(Color.BLUE), 0, 2);
+		LCD.drawString("Red: " + valueR, 0, 0);
+		LCD.drawString("Green: " + valueG, 0, 1);
+		LCD.drawString("Blue: " + valueB, 0, 2);
+		
+		try {
+			Thread.sleep(220);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LCD.clear();
+		
+	}
+
+	public void suppress() {
+		
+	}
+
+}
+------------------------------------------------------------
+[LINE FOLLOW COLOR]
+
+import lejos.nxt.SensorPort;
+import lejos.nxt.addon.ColorHTSensor;
+import lejos.robotics.Color;
+
+public class LineFollowColor {
+	
+	static ColorHTSensor cs = new ColorHTSensor(SensorPort.S3);
+	private static Color black;
+	private static Color white;
+	private static Color red;
+	static boolean csRedCalibrated;
+	static boolean csGreenCalibrated;
+	static boolean csBluecCalibrated;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void setBlack(Color value)
+	{
+		black = value;
+	}
+	
+	public static void setWhite(Color value)
+	{
+		white = value;
+	}
+	
+	public static void setRed(Color value)
+	{
+		red = value;
+	}
+	
+	public static Color getBlack()
+	{
+		return black;
+	}
+	
+	public static Color getWhite()
+	{
+		return white;
+	}
+	
+	public static Color getRed()
+	{
+		return red;
+	}
+	
+	public static Color getAverageColorValue()
+	{
+		final int NUMBER_OF_SAMPLES = 20;
+		int sumR = 0;
+		int sumG = 0;
+		int sumB = 0;
+		
+		for (int i = 0; i < NUMBER_OF_SAMPLES; i++)
+		{
+			sumR = sumR + cs.getColor().getRed();
+			sumG = sumG + cs.getColor().getGreen();
+			sumB = sumB + cs.getColor().getBlue();
+		}
+		
+		Color colour = new Color(sumR / NUMBER_OF_SAMPLES,
+				sumG / NUMBER_OF_SAMPLES,
+				sumB / NUMBER_OF_SAMPLES);
+		
+		return colour;
+		
+		
+	}
+
+}
