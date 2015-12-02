@@ -1,0 +1,40 @@
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.nxt.Motor;
+import lejos.robotics.subsumption.Behavior;
+
+public class MissionReport implements Behavior {
+	
+	public boolean takeControl() {
+		if (Driver.cs.getColorID() == 0){
+			return true;
+		}
+		return false;
+	}
+
+	public void action() {
+		long endTime = System.nanoTime();	
+		long timeTaken = (endTime - Driver.startTime)/1000000000;
+		long minutes = timeTaken/60;
+		long seconds = timeTaken%60;
+		
+		int distanceTravelled = (Motor.B.getTachoCount() + Motor.C.getTachoCount())/2;
+		
+		Driver.power.stop();
+		
+		LCD.drawString("Civilians Saved: " , 0, 0);
+		LCD.drawInt(Driver.civsSaved, 2, 1);
+		LCD.drawString("Time: " , 0, 2);
+		LCD.drawString(""+minutes+"m "+seconds + "s", 2, 3);
+		LCD.drawString("Distance: " , 0, 4);
+		LCD.drawString(""+distanceTravelled/360, 2, 5);
+		
+		Driver.partyTime = true; 
+		Button.waitForAnyPress();
+	}
+
+	public void suppress() {
+
+	}
+
+}
