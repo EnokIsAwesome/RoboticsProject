@@ -60,3 +60,5 @@ Emergency Stop //Finished (Kirstin)
 ------------------------------------------------
 
 Speed() is a method for fast and slow, its used in the target aqusition behaviors
+
+Dont let black lines cross color lines, also make the point where two or more colors cross be a black section (neutral for any color priority)
