@@ -15,45 +15,40 @@ Find Colour Path
 	action: rotate 150 right/left, rotate 300 left/right
 	suppress: 
 
-Target Found
+Target Found //DONE
 	takeAction: change in ultrasonic sensor
 	action: set target found to true, move forwards slowly until ultrasonic sensor value increases
 	suppress: stop
 
-Shortest Distance
-	takeAction: ultrasonic sensor value increases & target found
-	action: stop, turn 90 degrees to face target, turn ultrasonic sesnor -90 degrees
-	suppress:
-
-Save
+Save //DONE
 	takeAction: target shortest distance
 	action: turn on floodlight until target removed
 	suppress: stop
-
-Celebrate
-	takeAction: targets saved > set value
-	action: display message/make noise/move
-	suppress: stop
-
+	
 Mission Report// finished shahad
 	takeAction: stopped
 	action: display stats(targets saved, time taken, distance travelled)
 	suppress: 
+
+Celebrate //DONE
+	takeAction: targets saved > set value
+	action: display message/make noise/move
+	suppress: stop
 
 Set Colour //Started (James)
 	takeAction: colour not set
 	action: set colour
 	suppress: 
 
-Systems Check
+Systems Check //DONE
 	takeAction: button is pressed (RIGHT)
 	action: checks if motors have stalled (e.g. Motor.A.isStalled())
 	suppress: 
-
-Abandon Target// shahad started
-	takeAction: button is pressed (LEFT)
-	action: move on
-	suppress: 
+	
+Calibrate // Done
+	takeAction: notCalibrated
+	action calibrate sensors
+	suppress;
 
 Emergency Stop //Finished (Kirstin)
 	takeAction: button is pressed (ESCAPE)
@@ -64,6 +59,4 @@ Emergency Stop //Finished (Kirstin)
 
 ------------------------------------------------
 
-add variables from behaviors to driver such as 
-colorSet boolean = false;
-String colorPath;
+Speed() is a method for fast and slow, its used in the target aqusition behaviors
