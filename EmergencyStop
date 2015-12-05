@@ -1,7 +1,7 @@
 import lejos.nxt.Button;
 import lejos.robotics.subsumption.Behavior;
 
-public class EmergancyStop implements Behavior {
+public class EmergencyStop implements Behavior {
 
 	public boolean takeControl() {
 		if(Button.ESCAPE.isDown()){
