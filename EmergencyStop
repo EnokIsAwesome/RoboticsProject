@@ -26,3 +26,40 @@ public class EmergencyStop implements Behavior {
 	}
 
 }
+
+2)
+
+import lejos.nxt.Button;
+import lejos.nxt.SensorPort;
+import lejos.nxt.SensorPortListener;
+import lejos.robotics.subsumption.Behavior;
+
+public class EmergencyStop implements Runnable {
+
+
+	@Override
+	public void run() {
+		boolean secondpress = false;
+		while(true){
+			if(Button.waitForAnyPress() == Button.ID_ESCAPE && !secondpress){
+				Driver.isEmergencyStop = true;
+				Driver.power.stop();
+	//			Button.ESCAPE.waitForPressAndRelease();
+				try {
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+				secondpress = true;
+			if(Button.waitForAnyPress() == Button.ID_ESCAPE && secondpress){
+				Driver.isEmergencyStop = false;
+				secondpress = false;
+			}
+				
+			}
+		}
+	}
+
+}
+
