@@ -1,0 +1,19 @@
+import lejos.robotics.subsumption.Behavior;
+
+public class Celebrate implements Behavior {
+	
+	private static Song song = new Song();
+	
+	public boolean takeControl() {
+		return Driver.partyTime;
+	}
+
+	public void action() {
+		song.playSong();
+	}
+
+	public void suppress() {
+		
+	}
+
+}
