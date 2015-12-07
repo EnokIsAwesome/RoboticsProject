@@ -1,165 +1,124 @@
 import lejos.nxt.Sound;
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.nxt.Motor;
+import lejos.nxt.SensorPort;
+import lejos.nxt.SensorPortListener;
 
-public class Song {
+public class Song implements SensorPortListener{
    private static String[] bar1_2 = { "Bb4", "Bb4", "Bb4", "Bb4", "Ab4", "Bb4"};
    private static String[] bar3 = { "Bb4", "Db5", "Bb4", "Ab4"};
    private static String[] bar4 = { "Gb4", "Eb4", "Eb4", "F4", "F#4", "Eb4"};
 
    public void playSong(){
       Music music = new Music();
-      while (true){
+      for(int n=0; n<2 /*|| Driver.stop == false*/; n++){
+    	  Driver.power.rotate(-360, true);
+    	  
     	  int i = 0;
 	      music.musicFlute(bar1_2[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      Sound.pause(500);
 	      music.musicFlute(bar1_2[i], 250);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
+	      music.musicFlute(bar1_2[i], 125);
+	      i++; 
+	      Driver.ls.setFloodlight(true);
+	      music.musicFlute(bar1_2[i], 125);
+	      i++; 
+	      Driver.ls.setFloodlight(false);
+	      
 	      music.musicFlute(bar1_2[i], 125);
 	      i++;
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar1_2[i], 125);
-	      i++;
-	      music.musicFlute(bar1_2[i], 125);
-	      i++;
-	      music.musicFlute(bar1_2[i], 125);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      Sound.pause(250);
 	      //end of first bar
+	      
+	      Driver.power.rotate(360, true);
+	      
 	      i = 0;
 	      music.musicFlute(bar1_2[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      Sound.pause(500);
 	      music.musicFlute(bar1_2[i], 250);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      music.musicFlute(bar1_2[i], 125);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar1_2[i], 125);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      music.musicFlute(bar1_2[i], 125);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar1_2[i], 125);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      Sound.pause(250);
 	      //end of second bar
 	      
+	      Driver.power.rotate(-360, true);
+	      
 	      i = 0;
 	      music.musicFlute(bar3[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      Sound.pause(250);
 	      music.musicFlute(bar3[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      music.musicFlute(bar3[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar3[i], 500);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      //end of third bar
+	      
+	      Driver.power.rotate(360, true);
 	      
 	      i = 0;
 	      music.musicFlute(bar4[i], 250);
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      Sound.pause(250);
 	      music.musicFlute(bar4[i], 250); //B 
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      music.musicFlute(bar4[i], 250); //C
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar4[i], 250); //C
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      music.musicFlute(bar4[i], 250); //D
-	      i++;
+	      i++; 
+	      Driver.ls.setFloodlight(true);
 	      music.musicFlute(bar4[i], 250); //D
-	      i++;
-	      
-	      
+	      i++; 
+	      Driver.ls.setFloodlight(false);
 	      //end of fourth bar
+	      
+	      
 	       
       }
+      LCD.drawString("EXIT", 3, 3);
    }
+
+public void stateChanged(SensorPort aSource, int aOldValue, int aNewValue) {
+	if(Button.ESCAPE.isDown()){
+		Driver.stop = true;
+	}
 }
-
-// 1, 1, 1/2, 1/4, 1/4. 1/4, 1/4, 1/4, 1/2
-// 1, 1, 1/2, 1/4, 1/4, 1/4, 1/4,
-// 1, 1/2, 1, 1/2, 1/2, 1/2
-// ALL 1/2
-
-//CCVBV
-
--------------------------------------------------------------------------------
-
-import lejos.nxt.Sound;
-
-public class Song {
-   private static String[] melody = { "Bb4", "Bb4", "Bb4", "Bb4", "Ab4", "Bb4"};
-   private static String[] melody2 = { "Bb4", "Db5", "Bb4", "Ab4"};
-   private static String[] melody3 = { "Gb4", "Eb4", "Eb4", "F4", "F#4", "Eb4"};
-
-   public static void main(String[] args) {
-      Music music = new Music();
-      while (true){
-    	  int i = 0;
-	      music.musicFlute(melody[i], 500);
-	      i++;
-	      Sound.pause(500);
-	      music.musicFlute(melody[i], 250);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      Sound.pause(250);
-	      //end of first bar
-	      i = 0;
-	      music.musicFlute(melody[i], 500);
-	      i++;
-	      Sound.pause(500);
-	      music.musicFlute(melody[i], 250);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      music.musicFlute(melody[i], 125);
-	      i++;
-	      Sound.pause(250);
-	      //end of second bar
-	      
-	      i = 0;
-	      music.musicFlute(melody2[i], 500);
-	      i++;
-	      Sound.pause(250);
-	      music.musicFlute(melody2[i], 500);
-	      i++;
-	      music.musicFlute(melody2[i], 500);
-	      i++;
-	      music.musicFlute(melody2[i], 500);
-	      i++;
-	      //end of third bar
-	      
-	      i = 0;
-	      music.musicFlute(melody3[i], 250);
-	      i++;
-	      Sound.pause(250);
-	      music.musicFlute(melody3[i], 250); //B 
-	      i++;
-	      music.musicFlute(melody3[i], 250); //C
-	      i++;
-	      music.musicFlute(melody3[i], 250); //C
-	      i++;
-	      music.musicFlute(melody3[i], 250); //D
-	      i++;
-	      music.musicFlute(melody3[i], 250); //D
-	      i++;
-	      Sound.pause(250);
-	      
-	      
-	      //end of fourth bar
-	       
-      }
-   }
+   
+   
 }
 
 // 1, 1, 1/2, 1/4, 1/4. 1/4, 1/4, 1/4, 1/2
