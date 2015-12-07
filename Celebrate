@@ -10,10 +10,11 @@ public class Celebrate implements Behavior {
 
 	public void action() {
 		song.playSong();
+		Driver.partyTime = false;
 	}
 
 	public void suppress() {
-		
+		Driver.stop = true;
 	}
 
 }
